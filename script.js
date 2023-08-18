@@ -24,23 +24,9 @@ function draw() {
 }
 
 function drawBackground() {
-	//drawSky();
-	//drawSun();
 	drawGrass();
 	drawRoad();
 	drawRoadStripes();
-}
-
-function drawSky() {
-	ctx.fillStyle = "lightblue";
-	ctx.fillRect(0, 0, canvas.width, 100);
-}
-
-function drawSun() {
-	ctx.fillStyle = "yellow";
-	ctx.beginPath();
-	ctx.arc(250, 50, 20, 0, Math.PI * 2);
-	ctx.fill();
 }
 
 function drawGrass() {
