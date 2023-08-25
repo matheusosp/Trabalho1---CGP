@@ -206,7 +206,7 @@ function drawSpeedometerPart(options, alphaValue, strokeStyle, startPos) {
 
 	options.ctx.stroke();
 }
-function drawNeedleDial(options, alphaValue, strokeStyle, fillStyle) {
+function drawNeedleDial(options) {
     var i = 0;
 
 	for (i = 0; i < 20; i++) {
