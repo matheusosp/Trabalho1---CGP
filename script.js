@@ -291,6 +291,16 @@ function convertSpeedToAngle(speed) {
 function drawGrass() {
 	ctx.fillStyle = "green";
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+	ctx.fillStyle = "white";
+    ctx.font = "20px Arial";
+
+    let textWidth = ctx.measureText("WASD ou setas para movimentar o carro").width;
+    
+    let x = (canvas.width - textWidth) / 2;
+    let y = canvas.height / 2 - 180;
+    
+    ctx.fillText("WASD ou ⬆️⬅️⬇️➡️  para movimentar o carro", x, y);
 }
 
 function drawRoad() {
@@ -317,8 +327,8 @@ function drawRoadStripes() {
 	for (var i = 0; i < 22 ; i++) {
         ctx.fillRect(150, 125 + i * 20, 2, 10);
     }
-
 }
+
 var limitX = 205;         
 var limitY = 100;        
 var limitWidth = 825;     
@@ -341,6 +351,20 @@ function processKeys() {
         moveY = y - 2 * Math.sin(ang);		
     }
 
+	if (teclas[68]) {  //w
+        ang += Math.PI / 90;
+    }
+    if (teclas[65]) {  
+        ang -= Math.PI / 90;
+    }
+    if (teclas[87]) {  
+        moveX = x + 2 * Math.cos(ang);
+        moveY = y + 2 * Math.sin(ang);	
+    }
+    if (teclas[83]) { 
+        moveX = x - 2 * Math.cos(ang);
+        moveY = y - 2 * Math.sin(ang);		
+    }
 
     moveX = Math.max(90, Math.min(canvas.width - 90, moveX));
     moveY = Math.max(50, Math.min(canvas.height - 50 , moveY));
@@ -360,22 +384,16 @@ function isInsideLimitSquare(posX, posY) {
 }
 function drawCar() {
 	let larg = 80, alt = 45;
-	ctx.fillStyle = "rgb(255, 128, 0)";
-	ctx.fillRect(-larg / 2, -alt / 2, larg, alt);
+
+	let carImg = new Image();
+	carImg.src = "assets/car.png";
 	
-	ctx.fillStyle = "rgb(0, 180, 255)";
-	ctx.fillRect(0, -19, 20, 38);
-	
-	ctx.fillStyle = "rgb(255, 255, 0)";
-	ctx.fillRect(32, -19, 8, 10);
-	ctx.fillRect(32, 9, 8, 10);
-	
+    ctx.drawImage(carImg, -larg / 2, -alt / 2, larg, alt);
+    
 	ctx.beginPath();
 	ctx.moveTo(0, 0);
 	ctx.stroke();
 }
-
-
 
 document.onkeydown = function (evt) {
 	teclas[evt.keyCode] = true;
